@@ -55,10 +55,6 @@ public class Jadwal {
         return uuid;
     }
 
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
-    }
-
     public LocalDate getTanggalMulai() {
         return tanggalMulai;
     }

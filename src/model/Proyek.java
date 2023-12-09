@@ -64,10 +64,6 @@ public class Proyek {
         return uuid;
     }
 
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
-    }
-
     public String getNama() {
         return nama;
     }
