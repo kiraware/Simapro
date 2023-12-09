@@ -43,9 +43,9 @@ public class TugasTest {
         String deskripsi = "desc";
         UUID uuidJadwal = UUID.randomUUID();
         UUID uuidStatus = UUID.randomUUID();
-        UUID uuidTim = UUID.randomUUID();
-        Tugas tugas = new Tugas(uuid, nama, deskripsi, uuidJadwal, uuidStatus, uuidTim);
-        String expResult = "Tugas{" + "uuid=" + uuid.toString() + ", nama=test, deskripsi=desc, uuidJadwal=" + uuidJadwal.toString() + ", uuidStatus=" + uuidStatus.toString() + ", uuidTim=" + uuidTim.toString() + '}';
+        UUID uuidTimPegawai = UUID.randomUUID();
+        Tugas tugas = new Tugas(uuid, nama, deskripsi, uuidJadwal, uuidStatus, uuidTimPegawai);
+        String expResult = "Tugas{" + "uuid=" + uuid.toString() + ", nama=test, deskripsi=desc, uuidJadwal=" + uuidJadwal.toString() + ", uuidStatus=" + uuidStatus.toString() + ", uuidTimPegawai=" + uuidTimPegawai.toString() + '}';
         String result = tugas.toString();
         assertEquals(expResult, result);
     }
@@ -154,25 +154,25 @@ public class TugasTest {
     }
 
     /**
-     * Test of getUuidTim method, of class Tugas.
+     * Test of getUuidTimPegawai method, of class Tugas.
      */
     @Test
-    public void testGetUuidTim() {
+    public void testGetUuidTimPegawai() {
         UUID expResult = UUID.randomUUID();
         Tugas tugas = new Tugas(UUID.randomUUID(), "test", "desc", UUID.randomUUID(), UUID.randomUUID(), expResult);
-        UUID result = tugas.getUuidTim();
+        UUID result = tugas.getUuidTimPegawai();
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of setUuidTim method, of class Tugas.
+     * Test of setUuidTimPegawai method, of class Tugas.
      */
     @Test
-    public void testSetUuidTim() {
+    public void testSetUuidTimPegawai() {
         UUID expResult = UUID.randomUUID();
         Tugas tugas = new Tugas();
-        tugas.setUuidTim(expResult);
-        UUID result = tugas.getUuidTim();
+        tugas.setUuidTimPegawai(expResult);
+        UUID result = tugas.getUuidTimPegawai();
         assertEquals(expResult, result);
     }
 }

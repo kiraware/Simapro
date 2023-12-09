@@ -41,8 +41,9 @@ public class TimPegawaiTest {
         UUID uuid = UUID.randomUUID();
         UUID uuidTim = UUID.randomUUID();
         UUID uuidPegawai = UUID.randomUUID();
-        TimPegawai timPegawai = new TimPegawai(uuid, uuidTim, uuidPegawai);
-        String expResult = "TimPegawai{" + "uuid=" + uuid.toString() + ", uuidTim=" + uuidTim.toString() + ", uuidPegawai=" + uuidPegawai.toString() + '}';
+        UUID uuidTugas = UUID.randomUUID();
+        TimPegawai timPegawai = new TimPegawai(uuid, uuidTim, uuidPegawai, uuidTugas);
+        String expResult = "TimPegawai{" + "uuid=" + uuid.toString() + ", uuidTim=" + uuidTim.toString() + ", uuidPegawai=" + uuidPegawai.toString() + ", uuidTugas=" + uuidTugas.toString() + '}';
         String result = timPegawai.toString();
         assertEquals(expResult, result);
     }
@@ -53,7 +54,7 @@ public class TimPegawaiTest {
     @Test
     public void testGetUuid() {
         UUID expResult = UUID.randomUUID();
-        TimPegawai timPegawai = new TimPegawai(expResult, UUID.randomUUID(), UUID.randomUUID());
+        TimPegawai timPegawai = new TimPegawai(expResult, UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID());
         UUID result = timPegawai.getUuid();
         assertEquals(expResult, result);
     }
@@ -64,7 +65,7 @@ public class TimPegawaiTest {
     @Test
     public void testGetUuidTim() {
         UUID expResult = UUID.randomUUID();
-        TimPegawai timPegawai = new TimPegawai(UUID.randomUUID(), expResult, UUID.randomUUID());
+        TimPegawai timPegawai = new TimPegawai(UUID.randomUUID(), expResult, UUID.randomUUID(), UUID.randomUUID());
         UUID result = timPegawai.getUuidTim();
         assertEquals(expResult, result);
     }
@@ -87,7 +88,7 @@ public class TimPegawaiTest {
     @Test
     public void testGetUuidPegawai() {
         UUID expResult = UUID.randomUUID();
-        TimPegawai timPegawai = new TimPegawai(UUID.randomUUID(), UUID.randomUUID(), expResult);
+        TimPegawai timPegawai = new TimPegawai(UUID.randomUUID(), UUID.randomUUID(), expResult, UUID.randomUUID());
         UUID result = timPegawai.getUuidPegawai();
         assertEquals(expResult, result);
     }
@@ -101,6 +102,29 @@ public class TimPegawaiTest {
         TimPegawai timPegawai = new TimPegawai();
         timPegawai.setUuidPegawai(expResult);
         UUID result = timPegawai.getUuidPegawai();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getUuidTugas method, of class TimPegawai.
+     */
+    @Test
+    public void testGetUuidTugas() {
+        UUID expResult = UUID.randomUUID();
+        TimPegawai timPegawai = new TimPegawai(UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID(), expResult);
+        UUID result = timPegawai.getUuidTugas();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of setUuidTugas method, of class TimPegawai.
+     */
+    @Test
+    public void testSetUuidTugas() {
+        UUID expResult = UUID.randomUUID();
+        TimPegawai timPegawai = new TimPegawai();
+        timPegawai.setUuidTugas(expResult);
+        UUID result = timPegawai.getUuidTugas();
         assertEquals(expResult, result);
     }
 }
