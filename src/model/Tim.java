@@ -1,29 +1,29 @@
-package simapro;
+package model;
 
 import java.util.Objects;
 import java.util.UUID;
 
-public class Pegawai {
+public class Tim {
     private UUID uuid;
     private String nama;
-    private UUID uuidJabatan;
+    private UUID uuidProyek;
 
-    public Pegawai() {
+    public Tim() {
         this.uuid = UUID.randomUUID();
         this.nama = "";
-        this.uuidJabatan = null;
+        this.uuidProyek = null;
     }
 
-    public Pegawai(UUID uuid, String nama, UUID uuidJabatan) {
+    public Tim(UUID uuid, String nama, UUID uuidProyek) {
         this.uuid = uuid;
         this.nama = nama;
-        this.uuidJabatan = uuidJabatan;
+        this.uuidProyek = uuidProyek;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 41 * hash + Objects.hashCode(this.uuid);
+        int hash = 5;
+        hash = 59 * hash + Objects.hashCode(this.uuid);
         return hash;
     }
 
@@ -38,13 +38,13 @@ public class Pegawai {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Pegawai other = (Pegawai) obj;
+        final Tim other = (Tim) obj;
         return Objects.equals(this.uuid, other.uuid);
     }
 
     @Override
     public String toString() {
-        return "Pegawai{" + "uuid=" + uuid + ", nama=" + nama + ", uuidJabatan=" + uuidJabatan + '}';
+        return "Tim{" + "uuid=" + uuid + ", nama=" + nama + ", uuidProyek=" + uuidProyek + '}';
     }
 
     public UUID getUuid() {
@@ -63,11 +63,11 @@ public class Pegawai {
         this.nama = nama;
     }
 
-    public UUID getUuidJabatan() {
-        return uuidJabatan;
+    public UUID getUuidProyek() {
+        return uuidProyek;
     }
 
-    public void setUuidJabatan(UUID uuidJabatan) {
-        this.uuidJabatan = uuidJabatan;
+    public void setUuidProyek(UUID uuidProyek) {
+        this.uuidProyek = uuidProyek;
     }
 }

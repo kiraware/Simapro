@@ -1,4 +1,4 @@
-package simapro;
+package dao;
 
 import db.DBHelper;
 import java.sql.Connection;
@@ -9,13 +9,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.UUID;
+import model.Pegawai;
 
-public class TugasModel {
+public class PegawaiDao {
     private static final Connection CONN = DBHelper.getConnection();
-    private static final Logger logger = Logger.getLogger(TugasModel.class.getName());
+    private static final Logger logger = Logger.getLogger(PegawaiDao.class.getName());
 
-    public void add(Tugas tugas) {
-        String insert = "INSERT INTO `tugas` (uuid, nama, deskripsi, uuidJadwal, uuidStatus, uuidTim) VALUES ('" + tugas.getUuid() + "','" + tugas.getNama() + "','" + tugas.getDeskripsi() + "','" + tugas.getUuidJadwal() + "','" + tugas.getUuidStatus() + "','" + tugas.getUuidTim() + "')";
+    public void add(Pegawai pegawai) {
+        String insert = "INSERT INTO `pegawai` (uuid, nama, uuidJabatan) VALUES ('" + pegawai.getUuid() + "','" + pegawai.getNama() + "','" + pegawai.getUuidJabatan() + "')";
 
         try {
             if (CONN.createStatement().executeUpdate(insert) > 0) {
@@ -28,43 +29,43 @@ public class TugasModel {
         }
     }
 
-    public List<Tugas> all() {
-        String query = "SELECT * FROM `tugas`";
-        List<Tugas> tugases = new ArrayList<>();
+    public List<Pegawai> all() {
+        String query = "SELECT * FROM `pegawai`";
+        List<Pegawai> pegawais = new ArrayList<>();
 
         try {
             ResultSet rs = CONN.createStatement().executeQuery(query);
 
             while (rs.next()) {
-                Tugas tugas = new Tugas(UUID.fromString(rs.getString("uuid")), rs.getString("nama"), rs.getString("deskripsi"), UUID.fromString(rs.getString("uuidJadwal")), UUID.fromString(rs.getString("uuidStatus")), UUID.fromString(rs.getString("uuidTim")));
-                tugases.add(tugas);
+                Pegawai pegawai = new Pegawai(UUID.fromString(rs.getString("uuid")), rs.getString("nama"), UUID.fromString(rs.getString("uuidJabatan")));
+                pegawais.add(pegawai);
             }
         } catch (SQLException ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
 
-        return tugases;
+        return pegawais;
     }
     
-    public Tugas get(UUID uuid) {
-        String query = "SELECT * FROM `tugas` WHERE `uuid`='" + uuid + "'";
-        Tugas tugas = null;
+    public Pegawai get(UUID uuid) {
+        String query = "SELECT * FROM `pegawai` WHERE `uuid`='" + uuid + "'";
+        Pegawai pegawai = null;
 
         try {
             ResultSet rs = CONN.createStatement().executeQuery(query);
 
             while (rs.next()) {
-                tugas = new Tugas(UUID.fromString(rs.getString("uuid")), rs.getString("nama"), rs.getString("deskripsi"), UUID.fromString(rs.getString("uuidJadwal")), UUID.fromString(rs.getString("uuidStatus")), UUID.fromString(rs.getString("uuidTim")));
+                pegawai = new Pegawai(UUID.fromString(rs.getString("uuid")), rs.getString("nama"), UUID.fromString(rs.getString("uuidJabatan")));
             }
         } catch (SQLException ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
 
-        return tugas;
+        return pegawai;
     }
 
-    public void edit(UUID uuid, Tugas tugas) {
-        String update = "UPDATE `tugas` SET `uuid`='" + tugas.getUuid() + "',`nama`='" + tugas.getNama() + "',`deskripsi`='" + tugas.getDeskripsi() + "',`uuidJadwal`='" + tugas.getUuidJadwal()+ "',`uuidStatus`='" + tugas.getUuidStatus() + "',`uuidTim`='" + tugas.getUuidTim() + "' WHERE uuid='" + uuid
+    public void edit(UUID uuid, Pegawai pegawai) {
+        String update = "UPDATE `pegawai` SET `uuid`='" + pegawai.getUuid() + "',`nama`='" + pegawai.getNama() + "',`uuidJabatan`='" + pegawai.getUuidJabatan() + "' WHERE uuid='" + uuid
                 + "'";
         System.out.println(update);
 
@@ -80,7 +81,7 @@ public class TugasModel {
     }
 
     public void delete(UUID uuid) {
-        String delete = "DELETE FROM `tugas` WHERE uuid='" + uuid + "'";
+        String delete = "DELETE FROM `pegawai` WHERE uuid='" + uuid + "'";
 
         try {
             if (CONN.createStatement().executeUpdate(delete) > 0) {

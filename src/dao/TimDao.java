@@ -1,4 +1,4 @@
-package simapro;
+package dao;
 
 import db.DBHelper;
 import java.sql.Connection;
@@ -9,13 +9,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.UUID;
+import model.Tim;
 
-public class TimPegawaiModel {
+public class TimDao {
     private static final Connection CONN = DBHelper.getConnection();
-    private static final Logger logger = Logger.getLogger(TimPegawaiModel.class.getName());
+    private static final Logger logger = Logger.getLogger(TimDao.class.getName());
 
-    public void add(TimPegawai timPegawai) {
-        String insert = "INSERT INTO `timPegawai` (uuid, uuidTim, uuidPegawai) VALUES ('" + timPegawai.getUuid() + "','" + timPegawai.getUuidTim() + "','" + timPegawai.getUuidPegawai() + "')";
+    public void add(Tim tim) {
+        String insert = "INSERT INTO `tim` (uuid, nama, uuidProyek) VALUES ('" + tim.getUuid() + "','" + tim.getNama() + "','" + tim.getUuidProyek() + "')";
 
         try {
             if (CONN.createStatement().executeUpdate(insert) > 0) {
@@ -28,43 +29,43 @@ public class TimPegawaiModel {
         }
     }
 
-    public List<TimPegawai> all() {
-        String query = "SELECT * FROM `timPegawai`";
-        List<TimPegawai> timPegawais = new ArrayList<>();
+    public List<Tim> all() {
+        String query = "SELECT * FROM `tim`";
+        List<Tim> tims = new ArrayList<>();
 
         try {
             ResultSet rs = CONN.createStatement().executeQuery(query);
 
             while (rs.next()) {
-                TimPegawai timPegawai = new TimPegawai(UUID.fromString(rs.getString("uuid")), UUID.fromString(rs.getString("uuidTim")), UUID.fromString(rs.getString("uuidPegawai")));
-                timPegawais.add(timPegawai);
+                Tim tim = new Tim(UUID.fromString(rs.getString("uuid")), rs.getString("nama"), UUID.fromString(rs.getString("uuidProyek")));
+                tims.add(tim);
             }
         } catch (SQLException ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
 
-        return timPegawais;
+        return tims;
     }
     
-    public TimPegawai get(UUID uuid) {
-        String query = "SELECT * FROM `timPegawai` WHERE `uuid`='" + uuid + "'";
-        TimPegawai timPegawai = null;
+    public Tim get(UUID uuid) {
+        String query = "SELECT * FROM `tim` WHERE `uuid`='" + uuid + "'";
+        Tim tim = null;
 
         try {
             ResultSet rs = CONN.createStatement().executeQuery(query);
 
             while (rs.next()) {
-                timPegawai = new TimPegawai(UUID.fromString(rs.getString("uuid")), UUID.fromString(rs.getString("uuidTim")), UUID.fromString(rs.getString("uuidPegawai")));
+                tim = new Tim(UUID.fromString(rs.getString("uuid")), rs.getString("nama"), UUID.fromString(rs.getString("uuidProyek")));
             }
         } catch (SQLException ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
 
-        return timPegawai;
+        return tim;
     }
 
-    public void edit(UUID uuid, TimPegawai timPegawai) {
-        String update = "UPDATE `timPegawai` SET `uuid`='" + timPegawai.getUuid() + "',`uuidTim`='" + timPegawai.getUuidTim() + "',`uuidPegawai`='" + timPegawai.getUuidPegawai() + "' WHERE uuid='" + uuid
+    public void edit(UUID uuid, Tim tim) {
+        String update = "UPDATE `tim` SET `uuid`='" + tim.getUuid() + "',`nama`='" + tim.getNama() + "',`uuidProyek`='" + tim.getUuidProyek() + "' WHERE uuid='" + uuid
                 + "'";
         System.out.println(update);
 
@@ -80,7 +81,7 @@ public class TimPegawaiModel {
     }
 
     public void delete(UUID uuid) {
-        String delete = "DELETE FROM `timPegawai` WHERE uuid='" + uuid + "'";
+        String delete = "DELETE FROM `tim` WHERE uuid='" + uuid + "'";
 
         try {
             if (CONN.createStatement().executeUpdate(delete) > 0) {

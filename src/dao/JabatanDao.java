@@ -1,4 +1,4 @@
-package simapro;
+package dao;
 
 import db.DBHelper;
 import java.sql.Connection;
@@ -9,13 +9,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.UUID;
+import model.Jabatan;
 
-public class StatusModel {
+public class JabatanDao {
     private static final Connection CONN = DBHelper.getConnection();
-    private static final Logger logger = Logger.getLogger(StatusModel.class.getName());
+    private static final Logger logger = Logger.getLogger(JabatanDao.class.getName());
 
-    public void add(Status status) {
-        String insert = "INSERT INTO `status` (uuid, nama) VALUES ('" + status.getUuid() + "','" + status.getNama() + "')";
+    public void add(Jabatan jabatan) {
+        String insert = "INSERT INTO `jabatan` (uuid, nama) VALUES ('" + jabatan.getUuid() + "','" + jabatan.getNama() + "')";
 
         try {
             if (CONN.createStatement().executeUpdate(insert) > 0) {
@@ -28,43 +29,43 @@ public class StatusModel {
         }
     }
 
-    public List<Status> all() {
-        String query = "SELECT * FROM `status`";
-        List<Status> statuses = new ArrayList<>();
+    public List<Jabatan> all() {
+        String query = "SELECT * FROM `jabatan`";
+        List<Jabatan> jabatans = new ArrayList<>();
 
         try {
             ResultSet rs = CONN.createStatement().executeQuery(query);
 
             while (rs.next()) {
-                Status status = new Status(UUID.fromString(rs.getString("uuid")), rs.getString("nama"));
-                statuses.add(status);
+                Jabatan jabatan = new Jabatan(UUID.fromString(rs.getString("uuid")), rs.getString("nama"));
+                jabatans.add(jabatan);
             }
         } catch (SQLException ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
 
-        return statuses;
+        return jabatans;
     }
     
-    public Status get(UUID uuid) {
-        String query = "SELECT * FROM `status` WHERE `uuid`='" + uuid + "'";
-        Status status = null;
+    public Jabatan get(UUID uuid) {
+        String query = "SELECT * FROM `jabatan` WHERE `uuid`='" + uuid + "'";
+        Jabatan jabatan = null;
 
         try {
             ResultSet rs = CONN.createStatement().executeQuery(query);
 
             while (rs.next()) {
-                status = new Status(UUID.fromString(rs.getString("uuid")), rs.getString("nama"));
+                jabatan = new Jabatan(UUID.fromString(rs.getString("uuid")), rs.getString("nama"));
             }
         } catch (SQLException ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
 
-        return status;
+        return jabatan;
     }
 
-    public void edit(UUID uuid, Status status) {
-        String update = "UPDATE `status` SET `uuid`='" + status.getUuid() + "',`nama`='" + status.getNama() + "' WHERE uuid='" + uuid
+    public void edit(UUID uuid, Jabatan jabatan) {
+        String update = "UPDATE `jabatan` SET `uuid`='" + jabatan.getUuid() + "',`nama`='" + jabatan.getNama() + "' WHERE uuid='" + uuid
                 + "'";
         System.out.println(update);
 
@@ -80,7 +81,7 @@ public class StatusModel {
     }
 
     public void delete(UUID uuid) {
-        String delete = "DELETE FROM `status` WHERE uuid='" + uuid + "'";
+        String delete = "DELETE FROM `jabatan` WHERE uuid='" + uuid + "'";
 
         try {
             if (CONN.createStatement().executeUpdate(delete) > 0) {

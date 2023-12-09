@@ -1,4 +1,4 @@
-package simapro;
+package dao;
 
 import db.DBHelper;
 import java.sql.Connection;
@@ -9,13 +9,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.UUID;
+import model.Jadwal;
 
-public class ProyekModel {
+public class JadwalDao {
     private static final Connection CONN = DBHelper.getConnection();
-    private static final Logger logger = Logger.getLogger(ProyekModel.class.getName());
+    private static final Logger logger = Logger.getLogger(JadwalDao.class.getName());
 
-    public void add(Proyek proyek) {
-        String insert = "INSERT INTO `proyek` (uuid, nama, deskripsi, tanggalMulai, tanggalSelesai, anggaran, uuidTim) VALUES ('" + proyek.getUuid() + "','" + proyek.getNama() + "','" + proyek.getDeskripsi() + "','" + proyek.getTanggalMulai() + "','" + proyek.getTanggalSelesai() + "','" + proyek.getAnggaran()+ "','" + proyek.getUuidTim() + "')";
+    public void add(Jadwal jadwal) {
+        String insert = "INSERT INTO `jadwal` (uuid, tanggalMulai, tanggalSelesai, uuidTugas) VALUES ('" + jadwal.getUuid() + "','" + jadwal.getTanggalMulai()+ "','" + jadwal.getTanggalSelesai() + "','" + jadwal.getUuidTugas() + "')";
 
         try {
             if (CONN.createStatement().executeUpdate(insert) > 0) {
@@ -28,43 +29,43 @@ public class ProyekModel {
         }
     }
 
-    public List<Proyek> all() {
-        String query = "SELECT * FROM `proyek`";
-        List<Proyek> proyekes = new ArrayList<>();
+    public List<Jadwal> all() {
+        String query = "SELECT * FROM `jadwal`";
+        List<Jadwal> jadwales = new ArrayList<>();
 
         try {
             ResultSet rs = CONN.createStatement().executeQuery(query);
 
             while (rs.next()) {
-                Proyek proyek = new Proyek(UUID.fromString(rs.getString("uuid")), rs.getString("nama"), rs.getString("deskripsi"), rs.getDate("tanggalMulai").toLocalDate(), rs.getDate("tanggalSelesai").toLocalDate(), rs.getDouble("anggaran"), UUID.fromString(rs.getString("uuidTim")));
-                proyekes.add(proyek);
+                Jadwal jadwal = new Jadwal(UUID.fromString(rs.getString("uuid")), rs.getDate("tanggalMulai").toLocalDate(), rs.getDate("tanggalSelesai").toLocalDate(), UUID.fromString(rs.getString("uuidTugas")));
+                jadwales.add(jadwal);
             }
         } catch (SQLException ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
 
-        return proyekes;
+        return jadwales;
     }
     
-    public Proyek get(UUID uuid) {
-        String query = "SELECT * FROM `proyek` WHERE `uuid`='" + uuid + "'";
-        Proyek proyek = null;
+    public Jadwal get(UUID uuid) {
+        String query = "SELECT * FROM `jadwal` WHERE `uuid`='" + uuid + "'";
+        Jadwal jadwal = null;
 
         try {
             ResultSet rs = CONN.createStatement().executeQuery(query);
 
             while (rs.next()) {
-                proyek = new Proyek(UUID.fromString(rs.getString("uuid")), rs.getString("nama"), rs.getString("deskripsi"), rs.getDate("tanggalMulai").toLocalDate(), rs.getDate("tanggalSelesai").toLocalDate(), rs.getDouble("anggaran"), UUID.fromString(rs.getString("uuidTim")));
+                jadwal = new Jadwal(UUID.fromString(rs.getString("uuid")), rs.getDate("tanggalMulai").toLocalDate(), rs.getDate("tanggalSelesai").toLocalDate(), UUID.fromString(rs.getString("uuidTugas")));
             }
         } catch (SQLException ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
 
-        return proyek;
+        return jadwal;
     }
 
-    public void edit(UUID uuid, Proyek proyek) {
-        String update = "UPDATE `proyek` SET `uuid`='" + proyek.getUuid() + "',`nama`='" + proyek.getNama() + "',`deskripsi`='" + proyek.getDeskripsi() + "',`tanggalMulai`='" + proyek.getTanggalMulai()+ "',`tanggalSelesai`='" + proyek.getTanggalSelesai() + "',`anggaran`='" + proyek.getAnggaran()+ "',`uuidTim`='" + proyek.getUuidTim() + "' WHERE uuid='" + uuid
+    public void edit(UUID uuid, Jadwal jadwal) {
+        String update = "UPDATE `jadwal` SET `uuid`='" + jadwal.getUuid() + "',`tanggalMulai`='" + jadwal.getTanggalMulai() + "',`tanggalSelesai`='" + jadwal.getTanggalSelesai() + "',`uuidTugas`='" + jadwal.getUuidTugas() + "' WHERE uuid='" + uuid
                 + "'";
         System.out.println(update);
 
@@ -80,7 +81,7 @@ public class ProyekModel {
     }
 
     public void delete(UUID uuid) {
-        String delete = "DELETE FROM `proyek` WHERE uuid='" + uuid + "'";
+        String delete = "DELETE FROM `jadwal` WHERE uuid='" + uuid + "'";
 
         try {
             if (CONN.createStatement().executeUpdate(delete) > 0) {
