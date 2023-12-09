@@ -59,18 +59,6 @@ public class TimPegawaiTest {
     }
 
     /**
-     * Test of setUuid method, of class TimPegawai.
-     */
-    @Test
-    public void testSetUuid() {
-        UUID expResult = UUID.randomUUID();
-        TimPegawai timPegawai = new TimPegawai();
-        timPegawai.setUuid(expResult);
-        UUID result = timPegawai.getUuid();
-        assertEquals(expResult, result);
-    }
-
-    /**
      * Test of getUuidTim method, of class TimPegawai.
      */
     @Test

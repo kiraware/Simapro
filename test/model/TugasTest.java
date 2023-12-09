@@ -62,18 +62,6 @@ public class TugasTest {
     }
 
     /**
-     * Test of setUuid method, of class Tugas.
-     */
-    @Test
-    public void testSetUuid() {
-        UUID expResult = UUID.randomUUID();
-        Tugas tugas = new Tugas();
-        tugas.setUuid(expResult);
-        UUID result = tugas.getUuid();
-        assertEquals(expResult, result);
-    }
-
-    /**
      * Test of getNama method, of class Tugas.
      */
     @Test

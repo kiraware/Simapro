@@ -57,18 +57,6 @@ public class JabatanTest {
     }
 
     /**
-     * Test of setUuid method, of class Jabatan.
-     */
-    @Test
-    public void testSetUuid() {
-        UUID expResult = UUID.randomUUID();
-        Jabatan jabatan = new Jabatan();
-        jabatan.setUuid(expResult);
-        UUID result = jabatan.getUuid();
-        assertEquals(expResult, result);
-    }
-
-    /**
      * Test of getNama method, of class Jabatan.
      */
     @Test

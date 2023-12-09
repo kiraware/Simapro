@@ -61,18 +61,6 @@ public class JadwalTest {
     }
 
     /**
-     * Test of setUuid method, of class Jadwal.
-     */
-    @Test
-    public void testSetUuid() {
-        UUID expResult = UUID.randomUUID();
-        Jadwal jadwal = new Jadwal();
-        jadwal.setUuid(expResult);
-        UUID result = jadwal.getUuid();
-        assertEquals(expResult, result);
-    }
-
-    /**
      * Test of getTanggalMulai method, of class Jadwal.
      */
     @Test

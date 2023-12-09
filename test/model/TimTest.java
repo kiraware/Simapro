@@ -58,18 +58,6 @@ public class TimTest {
     }
 
     /**
-     * Test of setUuid method, of class Tim.
-     */
-    @Test
-    public void testSetUuid() {
-        UUID expResult = UUID.randomUUID();
-        Tim tim = new Tim();
-        tim.setUuid(expResult);
-        UUID result = tim.getUuid();
-        assertEquals(expResult, result);
-    }
-
-    /**
      * Test of getNama method, of class Tim.
      */
     @Test

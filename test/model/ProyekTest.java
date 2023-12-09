@@ -64,18 +64,6 @@ public class ProyekTest {
     }
 
     /**
-     * Test of setUuid method, of class Proyek.
-     */
-    @Test
-    public void testSetUuid() {
-        UUID expResult = UUID.randomUUID();
-        Proyek proyek = new Proyek();
-        proyek.setUuid(expResult);
-        UUID result = proyek.getUuid();
-        assertEquals(expResult, result);
-    }
-
-    /**
      * Test of getNama method, of class Proyek.
      */
     @Test

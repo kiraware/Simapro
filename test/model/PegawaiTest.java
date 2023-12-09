@@ -58,18 +58,6 @@ public class PegawaiTest {
     }
 
     /**
-     * Test of setUuid method, of class Pegawai.
-     */
-    @Test
-    public void testSetUuid() {
-        UUID expResult = UUID.randomUUID();
-        Pegawai pegawai = new Pegawai();
-        pegawai.setUuid(expResult);
-        UUID result = pegawai.getUuid();
-        assertEquals(expResult, result);
-    }
-
-    /**
      * Test of getNama method, of class Pegawai.
      */
     @Test

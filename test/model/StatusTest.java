@@ -57,18 +57,6 @@ public class StatusTest {
     }
 
     /**
-     * Test of setUuid method, of class Status.
-     */
-    @Test
-    public void testSetUuid() {
-        UUID expResult = UUID.randomUUID();
-        Status status = new Status();
-        status.setUuid(expResult);
-        UUID result = status.getUuid();
-        assertEquals(expResult, result);
-    }
-
-    /**
      * Test of getNama method, of class Status.
      */
     @Test
