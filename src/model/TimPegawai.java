@@ -7,17 +7,20 @@ public class TimPegawai {
     private UUID uuid;
     private UUID uuidTim;
     private UUID uuidPegawai;
+    private UUID uuidTugas;
 
     public TimPegawai() {
         this.uuid = UUID.randomUUID();
         this.uuidTim = null;
         this.uuidPegawai = null;
+        this.uuidTugas = null;
     }
 
-    public TimPegawai(UUID uuid, UUID uuidTim, UUID uuidPegawai) {
+    public TimPegawai(UUID uuid, UUID uuidTim, UUID uuidPegawai, UUID uuidTugas) {
         this.uuid = uuid;
         this.uuidTim = uuidTim;
         this.uuidPegawai = uuidPegawai;
+        this.uuidTugas = uuidTugas;
     }
 
     @Override
@@ -44,7 +47,7 @@ public class TimPegawai {
 
     @Override
     public String toString() {
-        return "TimPegawai{" + "uuid=" + uuid + ", uuidTim=" + uuidTim + ", uuidPegawai=" + uuidPegawai + '}';
+        return "TimPegawai{" + "uuid=" + uuid + ", uuidTim=" + uuidTim + ", uuidPegawai=" + uuidPegawai + ", uuidTugas=" + uuidTugas + '}';
     }
 
     public UUID getUuid() {
@@ -65,5 +68,13 @@ public class TimPegawai {
 
     public void setUuidPegawai(UUID uuidPegawai) {
         this.uuidPegawai = uuidPegawai;
+    }
+
+    public UUID getUuidTugas() {
+        return uuidTugas;
+    }
+
+    public void setUuidTugas(UUID uuidTugas) {
+        this.uuidTugas = uuidTugas;
     }
 }
