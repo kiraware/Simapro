@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class TimPegawai {
-    private UUID uuid;
+    private final UUID uuid;
     private UUID uuidTim;
     private UUID uuidPegawai;
     private UUID uuidTugas;

@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class Proyek {
-    private UUID uuid;
+    private final UUID uuid;
     private String nama;
     private String deskripsi;
     private LocalDate tanggalMulai;

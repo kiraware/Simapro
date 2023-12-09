@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class Jadwal {
-    private UUID uuid;
+    private final UUID uuid;
     private LocalDate tanggalMulai;
     private LocalDate tanggalSelesai;
     private UUID uuidTugas;

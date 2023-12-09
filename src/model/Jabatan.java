@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class Jabatan {
-    private UUID uuid;
+    private final UUID uuid;
     private String nama;
 
     public Jabatan() {
