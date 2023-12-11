@@ -17,7 +17,7 @@ public class ProyekTest {
     @Test
     public void testHashCode() {
         Proyek proyek = new Proyek();
-        int expResult = 43 * 5 + Objects.hashCode(proyek.getUuid());
+        int expResult = 43 * 5 + Objects.hashCode(proyek.getUuidTim());
         int result = proyek.hashCode();
         assertEquals(expResult, result);
     }
@@ -39,27 +39,26 @@ public class ProyekTest {
      */
     @Test
     public void testToString() {
-        UUID uuid = UUID.randomUUID();
+        UUID uuidTim = UUID.randomUUID();
         String nama = "test";
         String deskripsi = "desc";
         LocalDate tanggalMulai = LocalDate.now();
         LocalDate tanggalSelesai = tanggalMulai.plusDays(1);
         double anggaran = 100;
-        UUID uuidTim = UUID.randomUUID();
-        Proyek proyek = new Proyek(uuid, nama, deskripsi, tanggalMulai, tanggalSelesai, anggaran, uuidTim);
-        String expResult = "Proyek{" + "uuid=" + uuid + ", nama=" + nama + ", deskripsi=" + deskripsi + ", tanggalMulai=" + tanggalMulai + ", tanggalSelesai=" + tanggalSelesai + ", anggaran=" + anggaran + ", uuidTim=" + uuidTim + '}';
+        Proyek proyek = new Proyek(uuidTim, nama, deskripsi, tanggalMulai, tanggalSelesai, anggaran);
+        String expResult = "Proyek{" + "uuidTim=" + uuidTim + ", nama=" + nama + ", deskripsi=" + deskripsi + ", tanggalMulai=" + tanggalMulai + ", tanggalSelesai=" + tanggalSelesai + ", anggaran=" + anggaran + '}';
         String result = proyek.toString();
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of getUuid method, of class Proyek.
+     * Test of getUuidTim method, of class Proyek.
      */
     @Test
-    public void testGetUuid() {
+    public void testGetUuidTim() {
         UUID expResult = UUID.randomUUID();
-        Proyek proyek = new Proyek(expResult, "test", "desc", LocalDate.now(), LocalDate.now(), 100, UUID.randomUUID());
-        UUID result = proyek.getUuid();
+        Proyek proyek = new Proyek(expResult, "test", "desc", LocalDate.now(), LocalDate.now(), 100);
+        UUID result = proyek.getUuidTim();
         assertEquals(expResult, result);
     }
 
@@ -69,7 +68,7 @@ public class ProyekTest {
     @Test
     public void testGetNama() {
         String expResult = "test";
-        Proyek proyek = new Proyek(UUID.randomUUID(), expResult, "desc", LocalDate.now(), LocalDate.now(), 100, UUID.randomUUID());
+        Proyek proyek = new Proyek(UUID.randomUUID(), expResult, "desc", LocalDate.now(), LocalDate.now(), 100);
         String result = proyek.getNama();
         assertEquals(expResult, result);
     }
@@ -92,7 +91,7 @@ public class ProyekTest {
     @Test
     public void testGetDeskripsi() {
         String expResult = "desc";
-        Proyek proyek = new Proyek(UUID.randomUUID(), "test", expResult, LocalDate.now(), LocalDate.now(), 100, UUID.randomUUID());
+        Proyek proyek = new Proyek(UUID.randomUUID(), "test", expResult, LocalDate.now(), LocalDate.now(), 100);
         String result = proyek.getDeskripsi();
         assertEquals(expResult, result);
     }
@@ -115,7 +114,7 @@ public class ProyekTest {
     @Test
     public void testGetTanggalMulai() {
         LocalDate expResult = LocalDate.now();
-        Proyek proyek = new Proyek(UUID.randomUUID(), "test", "desc", expResult, LocalDate.now(), 100, UUID.randomUUID());
+        Proyek proyek = new Proyek(UUID.randomUUID(), "test", "desc", expResult, LocalDate.now(), 100);
         LocalDate result = proyek.getTanggalMulai();
         assertEquals(expResult, result);
     }
@@ -138,7 +137,7 @@ public class ProyekTest {
     @Test
     public void testGetTanggalSelesai() {
         LocalDate expResult = LocalDate.now();
-        Proyek proyek = new Proyek(UUID.randomUUID(), "test", "desc", LocalDate.now(), expResult, 100, UUID.randomUUID());
+        Proyek proyek = new Proyek(UUID.randomUUID(), "test", "desc", LocalDate.now(), expResult, 100);
         LocalDate result = proyek.getTanggalSelesai();
         assertEquals(expResult, result);
     }
@@ -161,7 +160,7 @@ public class ProyekTest {
     @Test
     public void testGetAnggaran() {
         double expResult = 100;
-        Proyek proyek = new Proyek(UUID.randomUUID(), "test", "desc", LocalDate.now(), LocalDate.now(), expResult, UUID.randomUUID());
+        Proyek proyek = new Proyek(UUID.randomUUID(), "test", "desc", LocalDate.now(), LocalDate.now(), expResult);
         double result = proyek.getAnggaran();
         assertEquals(expResult, result, 0);
     }
@@ -176,28 +175,5 @@ public class ProyekTest {
         proyek.setAnggaran(expResult);
         double result = proyek.getAnggaran();
         assertEquals(expResult, result, 0);
-    }
-
-    /**
-     * Test of getUuidTim method, of class Proyek.
-     */
-    @Test
-    public void testGetUuidTim() {
-        UUID expResult = UUID.randomUUID();
-        Proyek proyek = new Proyek(UUID.randomUUID(), "test", "desc", LocalDate.now(), LocalDate.now(), 100, expResult);
-        UUID result = proyek.getUuidTim();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of setUuidTim method, of class Proyek.
-     */
-    @Test
-    public void testSetUuidTim() {
-        UUID expResult = UUID.randomUUID();
-        Proyek proyek = new Proyek();
-        proyek.setUuidTim(expResult);
-        UUID result = proyek.getUuidTim();
-        assertEquals(expResult, result);
     }
 }

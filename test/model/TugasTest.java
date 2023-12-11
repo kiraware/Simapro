@@ -41,11 +41,9 @@ public class TugasTest {
         UUID uuid = UUID.randomUUID();
         String nama = "test";
         String deskripsi = "desc";
-        UUID uuidJadwal = UUID.randomUUID();
         UUID uuidStatus = UUID.randomUUID();
-        UUID uuidTimPegawai = UUID.randomUUID();
-        Tugas tugas = new Tugas(uuid, nama, deskripsi, uuidJadwal, uuidStatus, uuidTimPegawai);
-        String expResult = "Tugas{" + "uuid=" + uuid.toString() + ", nama=test, deskripsi=desc, uuidJadwal=" + uuidJadwal.toString() + ", uuidStatus=" + uuidStatus.toString() + ", uuidTimPegawai=" + uuidTimPegawai.toString() + '}';
+        Tugas tugas = new Tugas(uuid, nama, deskripsi, uuidStatus);
+        String expResult = "Tugas{" + "uuid=" + uuid.toString() + ", nama=test, deskripsi=desc, uuidStatus=" + uuidStatus.toString() + '}';
         String result = tugas.toString();
         assertEquals(expResult, result);
     }
@@ -56,7 +54,7 @@ public class TugasTest {
     @Test
     public void testGetUuid() {
         UUID expResult = UUID.randomUUID();
-        Tugas tugas = new Tugas(expResult, "test", "desc", UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID());
+        Tugas tugas = new Tugas(expResult, "test", "desc", UUID.randomUUID());
         UUID result = tugas.getUuid();
         assertEquals(expResult, result);
     }
@@ -67,7 +65,7 @@ public class TugasTest {
     @Test
     public void testGetNama() {
         String expResult = "test";
-        Tugas tugas = new Tugas(UUID.randomUUID(), expResult, "desc", UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID());
+        Tugas tugas = new Tugas(UUID.randomUUID(), expResult, "desc", UUID.randomUUID());
         String result = tugas.getNama();
         assertEquals(expResult, result);
     }
@@ -90,7 +88,7 @@ public class TugasTest {
     @Test
     public void testGetDeskripsi() {
         String expResult = "desc";
-        Tugas tugas = new Tugas(UUID.randomUUID(), "test", expResult, UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID());
+        Tugas tugas = new Tugas(UUID.randomUUID(), "test", expResult, UUID.randomUUID());
         String result = tugas.getDeskripsi();
         assertEquals(expResult, result);
     }
@@ -108,35 +106,12 @@ public class TugasTest {
     }
 
     /**
-     * Test of getUuidTugas method, of class Tugas.
-     */
-    @Test
-    public void testGetUuidJadwal() {
-        UUID expResult = UUID.randomUUID();
-        Tugas tugas = new Tugas(UUID.randomUUID(), "test", "desc", expResult, UUID.randomUUID(), UUID.randomUUID());
-        UUID result = tugas.getUuidJadwal();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of setUuidTugas method, of class Tugas.
-     */
-    @Test
-    public void testSetUuidJadwal() {
-        UUID expResult = UUID.randomUUID();
-        Tugas tugas = new Tugas();
-        tugas.setUuidJadwal(expResult);
-        UUID result = tugas.getUuidJadwal();
-        assertEquals(expResult, result);
-    }
-
-    /**
      * Test of getUuidStatus method, of class Tugas.
      */
     @Test
     public void testGetUuidStatus() {
         UUID expResult = UUID.randomUUID();
-        Tugas tugas = new Tugas(UUID.randomUUID(), "test", "desc", UUID.randomUUID(), expResult, UUID.randomUUID());
+        Tugas tugas = new Tugas(UUID.randomUUID(), "test", "desc", expResult);
         UUID result = tugas.getUuidStatus();
         assertEquals(expResult, result);
     }
@@ -150,29 +125,6 @@ public class TugasTest {
         Tugas tugas = new Tugas();
         tugas.setUuidStatus(expResult);
         UUID result = tugas.getUuidStatus();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of getUuidTimPegawai method, of class Tugas.
-     */
-    @Test
-    public void testGetUuidTimPegawai() {
-        UUID expResult = UUID.randomUUID();
-        Tugas tugas = new Tugas(UUID.randomUUID(), "test", "desc", UUID.randomUUID(), UUID.randomUUID(), expResult);
-        UUID result = tugas.getUuidTimPegawai();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of setUuidTimPegawai method, of class Tugas.
-     */
-    @Test
-    public void testSetUuidTimPegawai() {
-        UUID expResult = UUID.randomUUID();
-        Tugas tugas = new Tugas();
-        tugas.setUuidTimPegawai(expResult);
-        UUID result = tugas.getUuidTimPegawai();
         assertEquals(expResult, result);
     }
 }

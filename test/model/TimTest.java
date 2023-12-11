@@ -39,9 +39,8 @@ public class TimTest {
     @Test
     public void testToString() {
         UUID uuid = UUID.randomUUID();
-        UUID uuidProyek = UUID.randomUUID();
-        Tim tim = new Tim(uuid, "test", uuidProyek);
-        String expResult = "Tim{uuid=" + uuid.toString() + ", nama=test, uuidProyek=" + uuidProyek.toString() + '}';
+        Tim tim = new Tim(uuid, "test");
+        String expResult = "Tim{uuid=" + uuid.toString() + ", nama=test}";
         String result = tim.toString();
         assertEquals(expResult, result);
     }
@@ -52,7 +51,7 @@ public class TimTest {
     @Test
     public void testGetUuid() {
         UUID expResult = UUID.randomUUID();
-        Tim tim = new Tim(expResult, "test", UUID.randomUUID());
+        Tim tim = new Tim(expResult, "test");
         UUID result = tim.getUuid();
         assertEquals(expResult, result);
     }
@@ -63,7 +62,7 @@ public class TimTest {
     @Test
     public void testGetNama() {
         String expResult = "test";
-        Tim tim = new Tim(UUID.randomUUID(), expResult, UUID.randomUUID());
+        Tim tim = new Tim(UUID.randomUUID(), expResult);
         String result = tim.getNama();
         assertEquals(expResult, result);
     }
@@ -77,29 +76,6 @@ public class TimTest {
         Tim tim = new Tim();
         tim.setNama(expResult);
         String result = tim.getNama();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of getUuid method, of class Tim.
-     */
-    @Test
-    public void testGetUuidProyek() {
-        UUID expResult = UUID.randomUUID();
-        Tim tim = new Tim(UUID.randomUUID(), "test", expResult);
-        UUID result = tim.getUuidProyek();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of setUuid method, of class Tim.
-     */
-    @Test
-    public void testSetUuidProyek() {
-        UUID expResult = UUID.randomUUID();
-        Tim tim = new Tim();
-        tim.setUuidProyek(expResult);
-        UUID result = tim.getUuidProyek();
         assertEquals(expResult, result);
     }
 }

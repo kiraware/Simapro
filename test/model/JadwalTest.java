@@ -17,7 +17,7 @@ public class JadwalTest {
     @Test
     public void testHashCode() {
         Jadwal jadwal = new Jadwal();
-        int expResult = 19 * 7 + Objects.hashCode(jadwal.getUuid());
+        int expResult = 19 * 7 + Objects.hashCode(jadwal.getUuidTugas());
         int result = jadwal.hashCode();
         assertEquals(expResult, result);
     }
@@ -39,24 +39,23 @@ public class JadwalTest {
      */
     @Test
     public void testToString() {
-        UUID uuid = UUID.randomUUID();
+        UUID uuidTugas = UUID.randomUUID();
         LocalDate tanggalMulai = LocalDate.now();
         LocalDate tanggalSelesai = tanggalMulai.plusDays(1);
-        UUID uuidTugas = UUID.randomUUID();
-        Jadwal jadwal = new Jadwal(uuid, tanggalMulai, tanggalSelesai, uuidTugas);
-        String expResult = "Jadwal{" + "uuid=" + uuid.toString() + ", tanggalMulai=" + tanggalMulai.toString() + ", tanggalSelesai=" + tanggalSelesai.toString() + ", uuidTugas=" + uuidTugas.toString() + '}';
+        Jadwal jadwal = new Jadwal(uuidTugas, tanggalMulai, tanggalSelesai);
+        String expResult = "Jadwal{" + "uuidTugas=" + uuidTugas.toString() + ", tanggalMulai=" + tanggalMulai.toString() + ", tanggalSelesai=" + tanggalSelesai.toString() + '}';
         String result = jadwal.toString();
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of getUuid method, of class Jadwal.
+     * Test of getUuidTugas method, of class Jadwal.
      */
     @Test
-    public void testGetUuid() {
+    public void testGetUuidTugas() {
         UUID expResult = UUID.randomUUID();
-        Jadwal jadwal = new Jadwal(expResult, LocalDate.now(), LocalDate.now(), UUID.randomUUID());
-        UUID result = jadwal.getUuid();
+        Jadwal jadwal = new Jadwal(expResult, LocalDate.now(), LocalDate.now());
+        UUID result = jadwal.getUuidTugas();
         assertEquals(expResult, result);
     }
 
@@ -66,7 +65,7 @@ public class JadwalTest {
     @Test
     public void testGetTanggalMulai() {
         LocalDate expResult = LocalDate.now();
-        Jadwal jadwal = new Jadwal(UUID.randomUUID(), expResult, LocalDate.now(), UUID.randomUUID());
+        Jadwal jadwal = new Jadwal(UUID.randomUUID(), expResult, LocalDate.now());
         LocalDate result = jadwal.getTanggalMulai();
         assertEquals(expResult, result);
     }
@@ -89,7 +88,7 @@ public class JadwalTest {
     @Test
     public void testGetTanggalSelesai() {
         LocalDate expResult = LocalDate.now();
-        Jadwal jadwal = new Jadwal(UUID.randomUUID(), LocalDate.now(), expResult, UUID.randomUUID());
+        Jadwal jadwal = new Jadwal(UUID.randomUUID(), LocalDate.now(), expResult);
         LocalDate result = jadwal.getTanggalSelesai();
         assertEquals(expResult, result);
     }
@@ -103,29 +102,6 @@ public class JadwalTest {
         Jadwal jadwal = new Jadwal();
         jadwal.setTanggalSelesai(expResult);
         LocalDate result = jadwal.getTanggalSelesai();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of getUuidTugas method, of class Jadwal.
-     */
-    @Test
-    public void testGetUuidTugas() {
-        UUID expResult = UUID.randomUUID();
-        Jadwal jadwal = new Jadwal(UUID.randomUUID(), LocalDate.now(), LocalDate.now(), expResult);
-        UUID result = jadwal.getUuidTugas();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of setUuidTugas method, of class Jadwal.
-     */
-    @Test
-    public void testSetUuidTugas() {
-        UUID expResult = UUID.randomUUID();
-        Jadwal jadwal = new Jadwal();
-        jadwal.setUuidTugas(expResult);
-        UUID result = jadwal.getUuidTugas();
         assertEquals(expResult, result);
     }
 }
