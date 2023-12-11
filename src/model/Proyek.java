@@ -5,38 +5,35 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class Proyek {
-    private final UUID uuid;
+    private final UUID uuidTim;
     private String nama;
     private String deskripsi;
     private LocalDate tanggalMulai;
     private LocalDate tanggalSelesai;
     private double anggaran;
-    private UUID uuidTim;
 
     public Proyek() {
-        this.uuid = UUID.randomUUID();
+        this.uuidTim = UUID.randomUUID();
         this.nama = "";
         this.deskripsi = "";
         this.tanggalMulai = null;
         this.tanggalSelesai = null;
         this.anggaran = 0;
-        this.uuidTim = null;
     }
 
-    public Proyek(UUID uuid, String nama, String deskripsi, LocalDate tanggalMulai, LocalDate tanggalSelesai, double anggaran, UUID uuidTim) {
-        this.uuid = uuid;
+    public Proyek(UUID uuidTim, String nama, String deskripsi, LocalDate tanggalMulai, LocalDate tanggalSelesai, double anggaran) {
+        this.uuidTim = uuidTim;
         this.nama = nama;
         this.deskripsi = deskripsi;
         this.tanggalMulai = tanggalMulai;
         this.tanggalSelesai = tanggalSelesai;
         this.anggaran = anggaran;
-        this.uuidTim = uuidTim;
     }
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 43 * hash + Objects.hashCode(this.uuid);
+        hash = 43 * hash + Objects.hashCode(this.uuidTim);
         return hash;
     }
 
@@ -52,16 +49,16 @@ public class Proyek {
             return false;
         }
         final Proyek other = (Proyek) obj;
-        return Objects.equals(this.uuid, other.uuid);
+        return Objects.equals(this.uuidTim, other.uuidTim);
     }
 
     @Override
     public String toString() {
-        return "Proyek{" + "uuid=" + uuid + ", nama=" + nama + ", deskripsi=" + deskripsi + ", tanggalMulai=" + tanggalMulai + ", tanggalSelesai=" + tanggalSelesai + ", anggaran=" + anggaran + ", uuidTim=" + uuidTim + '}';
+        return "Proyek{" + "uuidTim=" + uuidTim + ", nama=" + nama + ", deskripsi=" + deskripsi + ", tanggalMulai=" + tanggalMulai + ", tanggalSelesai=" + tanggalSelesai + ", anggaran=" + anggaran + '}';
     }
 
-    public UUID getUuid() {
-        return uuid;
+    public UUID getUuidTim() {
+        return uuidTim;
     }
 
     public String getNama() {
@@ -102,13 +99,5 @@ public class Proyek {
 
     public void setAnggaran(double anggaran) {
         this.anggaran = anggaran;
-    }
-
-    public UUID getUuidTim() {
-        return uuidTim;
-    }
-
-    public void setUuidTim(UUID uuidTim) {
-        this.uuidTim = uuidTim;
     }
 }

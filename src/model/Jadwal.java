@@ -5,29 +5,26 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class Jadwal {
-    private final UUID uuid;
+    private final UUID uuidTugas;
     private LocalDate tanggalMulai;
     private LocalDate tanggalSelesai;
-    private UUID uuidTugas;
 
     public Jadwal() {
-        this.uuid = UUID.randomUUID();
+        this.uuidTugas = UUID.randomUUID();
         this.tanggalMulai = null;
         this.tanggalSelesai = null;
-        this.uuidTugas = null;
     }
 
-    public Jadwal(UUID uuid, LocalDate tanggalMulai, LocalDate tanggalSelesai, UUID uuidTugas) {
-        this.uuid = uuid;
+    public Jadwal(UUID uuidTugas, LocalDate tanggalMulai, LocalDate tanggalSelesai) {
+        this.uuidTugas = uuidTugas;
         this.tanggalMulai = tanggalMulai;
         this.tanggalSelesai = tanggalSelesai;
-        this.uuidTugas = uuidTugas;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 19 * hash + Objects.hashCode(this.uuid);
+        hash = 19 * hash + Objects.hashCode(this.uuidTugas);
         return hash;
     }
 
@@ -43,16 +40,16 @@ public class Jadwal {
             return false;
         }
         final Jadwal other = (Jadwal) obj;
-        return Objects.equals(this.uuid, other.uuid);
+        return Objects.equals(this.uuidTugas, other.uuidTugas);
     }
 
     @Override
     public String toString() {
-        return "Jadwal{" + "uuid=" + uuid + ", tanggalMulai=" + tanggalMulai + ", tanggalSelesai=" + tanggalSelesai + ", uuidTugas=" + uuidTugas + '}';
+        return "Jadwal{" + "uuidTugas=" + uuidTugas + ", tanggalMulai=" + tanggalMulai + ", tanggalSelesai=" + tanggalSelesai + '}';
     }
 
-    public UUID getUuid() {
-        return uuid;
+    public UUID getUuidTugas() {
+        return uuidTugas;
     }
 
     public LocalDate getTanggalMulai() {
@@ -69,13 +66,5 @@ public class Jadwal {
 
     public void setTanggalSelesai(LocalDate tanggalSelesai) {
         this.tanggalSelesai = tanggalSelesai;
-    }
-
-    public UUID getUuidTugas() {
-        return uuidTugas;
-    }
-
-    public void setUuidTugas(UUID uuidTugas) {
-        this.uuidTugas = uuidTugas;
     }
 }

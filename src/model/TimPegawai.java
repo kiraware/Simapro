@@ -4,29 +4,29 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class TimPegawai {
-    private final UUID uuid;
+    private final UUID uuidTugas;
     private UUID uuidTim;
     private UUID uuidPegawai;
-    private UUID uuidTugas;
+    private UUID uuidJabatan;
 
     public TimPegawai() {
-        this.uuid = UUID.randomUUID();
+        this.uuidTugas = UUID.randomUUID();
         this.uuidTim = null;
         this.uuidPegawai = null;
-        this.uuidTugas = null;
+        this.uuidJabatan = null;
     }
 
-    public TimPegawai(UUID uuid, UUID uuidTim, UUID uuidPegawai, UUID uuidTugas) {
-        this.uuid = uuid;
+    public TimPegawai(UUID uuidTugas, UUID uuidTim, UUID uuidPegawai, UUID uuidJabatan) {
+        this.uuidTugas = uuidTugas;
         this.uuidTim = uuidTim;
         this.uuidPegawai = uuidPegawai;
-        this.uuidTugas = uuidTugas;
+        this.uuidJabatan = uuidJabatan;
     }
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 79 * hash + Objects.hashCode(this.uuid);
+        hash = 79 * hash + Objects.hashCode(this.uuidTugas);
         return hash;
     }
 
@@ -42,16 +42,16 @@ public class TimPegawai {
             return false;
         }
         final TimPegawai other = (TimPegawai) obj;
-        return Objects.equals(this.uuid, other.uuid);
+        return Objects.equals(this.uuidTugas, other.uuidTugas);
     }
 
     @Override
     public String toString() {
-        return "TimPegawai{" + "uuid=" + uuid + ", uuidTim=" + uuidTim + ", uuidPegawai=" + uuidPegawai + ", uuidTugas=" + uuidTugas + '}';
+        return "TimPegawai{" + "uuidTugas=" + uuidTugas + ", uuidTim=" + uuidTim + ", uuidPegawai=" + uuidPegawai + ", uuidJabatan=" + uuidJabatan + '}';
     }
 
-    public UUID getUuid() {
-        return uuid;
+    public UUID getUuidTugas() {
+        return uuidTugas;
     }
 
     public UUID getUuidTim() {
@@ -70,11 +70,11 @@ public class TimPegawai {
         this.uuidPegawai = uuidPegawai;
     }
 
-    public UUID getUuidTugas() {
-        return uuidTugas;
+    public UUID getUuidJabatan() {
+        return uuidJabatan;
     }
 
-    public void setUuidTugas(UUID uuidTugas) {
-        this.uuidTugas = uuidTugas;
+    public void setUuidJabatan(UUID uuidJabatan) {
+        this.uuidJabatan = uuidJabatan;
     }
 }

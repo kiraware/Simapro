@@ -6,18 +6,15 @@ import java.util.UUID;
 public class Pegawai {
     private final UUID uuid;
     private String nama;
-    private UUID uuidJabatan;
 
     public Pegawai() {
         this.uuid = UUID.randomUUID();
         this.nama = "";
-        this.uuidJabatan = null;
     }
 
-    public Pegawai(UUID uuid, String nama, UUID uuidJabatan) {
+    public Pegawai(UUID uuid, String nama) {
         this.uuid = uuid;
         this.nama = nama;
-        this.uuidJabatan = uuidJabatan;
     }
 
     @Override
@@ -44,7 +41,7 @@ public class Pegawai {
 
     @Override
     public String toString() {
-        return "Pegawai{" + "uuid=" + uuid + ", nama=" + nama + ", uuidJabatan=" + uuidJabatan + '}';
+        return "Pegawai{" + "uuid=" + uuid + ", nama=" + nama + '}';
     }
 
     public UUID getUuid() {
@@ -57,13 +54,5 @@ public class Pegawai {
 
     public void setNama(String nama) {
         this.nama = nama;
-    }
-
-    public UUID getUuidJabatan() {
-        return uuidJabatan;
-    }
-
-    public void setUuidJabatan(UUID uuidJabatan) {
-        this.uuidJabatan = uuidJabatan;
     }
 }

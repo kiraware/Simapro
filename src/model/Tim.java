@@ -6,18 +6,15 @@ import java.util.UUID;
 public class Tim {
     private final UUID uuid;
     private String nama;
-    private UUID uuidProyek;
 
     public Tim() {
         this.uuid = UUID.randomUUID();
         this.nama = "";
-        this.uuidProyek = null;
     }
 
-    public Tim(UUID uuid, String nama, UUID uuidProyek) {
+    public Tim(UUID uuid, String nama) {
         this.uuid = uuid;
         this.nama = nama;
-        this.uuidProyek = uuidProyek;
     }
 
     @Override
@@ -44,7 +41,7 @@ public class Tim {
 
     @Override
     public String toString() {
-        return "Tim{" + "uuid=" + uuid + ", nama=" + nama + ", uuidProyek=" + uuidProyek + '}';
+        return "Tim{" + "uuid=" + uuid + ", nama=" + nama + '}';
     }
 
     public UUID getUuid() {
@@ -57,13 +54,5 @@ public class Tim {
 
     public void setNama(String nama) {
         this.nama = nama;
-    }
-
-    public UUID getUuidProyek() {
-        return uuidProyek;
-    }
-
-    public void setUuidProyek(UUID uuidProyek) {
-        this.uuidProyek = uuidProyek;
     }
 }

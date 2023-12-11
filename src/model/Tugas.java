@@ -7,26 +7,20 @@ public class Tugas {
     private final UUID uuid;
     private String nama;
     private String deskripsi;
-    private UUID uuidJadwal;
     private UUID uuidStatus;
-    private UUID uuidTimPegawai;
 
     public Tugas() {
         this.uuid = UUID.randomUUID();
         this.nama = "";
         this.deskripsi = "";
-        this.uuidJadwal = null;
         this.uuidStatus = null;
-        this.uuidTimPegawai = null;
     }
 
-    public Tugas(UUID uuid, String nama, String deskripsi, UUID uuidJadwal, UUID uuidStatus, UUID uuidTimPegawai) {
+    public Tugas(UUID uuid, String nama, String deskripsi, UUID uuidStatus) {
         this.uuid = uuid;
         this.nama = nama;
         this.deskripsi = deskripsi;
-        this.uuidJadwal = uuidJadwal;
         this.uuidStatus = uuidStatus;
-        this.uuidTimPegawai = uuidTimPegawai;
     }
 
     @Override
@@ -53,7 +47,7 @@ public class Tugas {
 
     @Override
     public String toString() {
-        return "Tugas{" + "uuid=" + uuid + ", nama=" + nama + ", deskripsi=" + deskripsi + ", uuidJadwal=" + uuidJadwal + ", uuidStatus=" + uuidStatus + ", uuidTimPegawai=" + uuidTimPegawai + '}';
+        return "Tugas{" + "uuid=" + uuid + ", nama=" + nama + ", deskripsi=" + deskripsi + ", uuidStatus=" + uuidStatus + '}';
     }
 
     public UUID getUuid() {
@@ -76,27 +70,11 @@ public class Tugas {
         this.deskripsi = deskripsi;
     }
 
-    public UUID getUuidJadwal() {
-        return uuidJadwal;
-    }
-
-    public void setUuidJadwal(UUID uuidJadwal) {
-        this.uuidJadwal = uuidJadwal;
-    }
-
     public UUID getUuidStatus() {
         return uuidStatus;
     }
 
     public void setUuidStatus(UUID uuidStatus) {
         this.uuidStatus = uuidStatus;
-    }
-
-    public UUID getUuidTimPegawai() {
-        return uuidTimPegawai;
-    }
-
-    public void setUuidTimPegawai(UUID uuidTimPegawai) {
-        this.uuidTimPegawai = uuidTimPegawai;
     }
 }
