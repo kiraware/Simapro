@@ -2,6 +2,7 @@ package dao;
 
 import db.DBHelper;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -12,14 +13,20 @@ import java.util.UUID;
 import model.Pegawai;
 
 public class PegawaiDao {
-    private static final Connection CONN = DBHelper.getConnection();
+    private static Connection CONN = DBHelper.getConnection();
     private static final Logger logger = Logger.getLogger(PegawaiDao.class.getName());
 
-    public void add(Pegawai pegawai) {
-        String insert = "INSERT INTO `pegawai` (uuid, nama, uuidJabatan) VALUES ('" + pegawai.getUuid() + "','" + pegawai.getNama() + "','" + pegawai.getUuidJabatan() + "')";
+    public PegawaiDao(Connection conn) {
+        CONN = conn;
+    }
 
+    public void add(Pegawai pegawai) {
         try {
-            if (CONN.createStatement().executeUpdate(insert) > 0) {
+            PreparedStatement preparedStatement = CONN.prepareStatement("INSERT INTO `pegawai` (uuid, nama) VALUES (?, ?)");
+            preparedStatement.setString(1, pegawai.getUuid().toString());
+            preparedStatement.setString(2, pegawai.getNama());
+
+            if (preparedStatement.executeUpdate() > 0) {
                 logger.log(Level.INFO, "Berhasil memasukkan data");
             } else {
                 logger.log(Level.INFO, "Gagal memasukkan data");
@@ -37,7 +44,7 @@ public class PegawaiDao {
             ResultSet rs = CONN.createStatement().executeQuery(query);
 
             while (rs.next()) {
-                Pegawai pegawai = new Pegawai(UUID.fromString(rs.getString("uuid")), rs.getString("nama"), UUID.fromString(rs.getString("uuidJabatan")));
+                Pegawai pegawai = new Pegawai(UUID.fromString(rs.getString("uuid")), rs.getString("nama"));
                 pegawais.add(pegawai);
             }
         } catch (SQLException ex) {
@@ -48,14 +55,15 @@ public class PegawaiDao {
     }
     
     public Pegawai get(UUID uuid) {
-        String query = "SELECT * FROM `pegawai` WHERE `uuid`='" + uuid + "'";
         Pegawai pegawai = null;
 
         try {
-            ResultSet rs = CONN.createStatement().executeQuery(query);
+            PreparedStatement preparedStatement = CONN.prepareStatement("SELECT * FROM `pegawai` WHERE `uuid`=?");
+            preparedStatement.setString(1, uuid.toString());
+            ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                pegawai = new Pegawai(UUID.fromString(rs.getString("uuid")), rs.getString("nama"), UUID.fromString(rs.getString("uuidJabatan")));
+                pegawai = new Pegawai(UUID.fromString(rs.getString("uuid")), rs.getString("nama"));
             }
         } catch (SQLException ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
@@ -64,13 +72,13 @@ public class PegawaiDao {
         return pegawai;
     }
 
-    public void edit(UUID uuid, Pegawai pegawai) {
-        String update = "UPDATE `pegawai` SET `uuid`='" + pegawai.getUuid() + "',`nama`='" + pegawai.getNama() + "',`uuidJabatan`='" + pegawai.getUuidJabatan() + "' WHERE uuid='" + uuid
-                + "'";
-        System.out.println(update);
-
+    public void edit(Pegawai pegawai) {
         try {
-            if (CONN.createStatement().executeUpdate(update) > 0) {
+            PreparedStatement preparedStatement = CONN.prepareStatement("UPDATE `pegawai` SET `nama`=? WHERE `uuid`=?");
+            preparedStatement.setString(1, pegawai.getNama());
+            preparedStatement.setString(2, pegawai.getUuid().toString());
+
+            if (preparedStatement.executeUpdate() > 0) {
                 logger.log(Level.INFO, "Berhasil mengubah data");
             } else {
                 logger.log(Level.INFO, "Gagal mengubah data");
@@ -81,10 +89,11 @@ public class PegawaiDao {
     }
 
     public void delete(UUID uuid) {
-        String delete = "DELETE FROM `pegawai` WHERE uuid='" + uuid + "'";
-
         try {
-            if (CONN.createStatement().executeUpdate(delete) > 0) {
+            PreparedStatement preparedStatement = CONN.prepareStatement("DELETE FROM `pegawai` WHERE `uuid`=?");
+            preparedStatement.setString(1, uuid.toString());
+            
+            if (preparedStatement.executeUpdate() > 0) {
                 logger.log(Level.INFO, "Berhasil menghapus data");
             } else {
                 logger.log(Level.INFO, "Gagal menghapus data");

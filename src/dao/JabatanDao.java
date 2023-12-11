@@ -2,6 +2,7 @@ package dao;
 
 import db.DBHelper;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -12,14 +13,20 @@ import java.util.UUID;
 import model.Jabatan;
 
 public class JabatanDao {
-    private static final Connection CONN = DBHelper.getConnection();
+    private static Connection CONN = DBHelper.getConnection();
     private static final Logger logger = Logger.getLogger(JabatanDao.class.getName());
 
-    public void add(Jabatan jabatan) {
-        String insert = "INSERT INTO `jabatan` (uuid, nama) VALUES ('" + jabatan.getUuid() + "','" + jabatan.getNama() + "')";
+    public JabatanDao(Connection conn) {
+        CONN = conn;
+    }
 
+    public void add(Jabatan jabatan) {
         try {
-            if (CONN.createStatement().executeUpdate(insert) > 0) {
+            PreparedStatement preparedStatement = CONN.prepareStatement("INSERT INTO `jabatan` (uuid, nama) VALUES (?, ?)");
+            preparedStatement.setString(1, jabatan.getUuid().toString());
+            preparedStatement.setString(2, jabatan.getNama());
+
+            if (preparedStatement.executeUpdate() > 0) {
                 logger.log(Level.INFO, "Berhasil memasukkan data");
             } else {
                 logger.log(Level.INFO, "Gagal memasukkan data");
@@ -48,11 +55,12 @@ public class JabatanDao {
     }
     
     public Jabatan get(UUID uuid) {
-        String query = "SELECT * FROM `jabatan` WHERE `uuid`='" + uuid + "'";
         Jabatan jabatan = null;
 
         try {
-            ResultSet rs = CONN.createStatement().executeQuery(query);
+            PreparedStatement preparedStatement = CONN.prepareStatement("SELECT * FROM `jabatan` WHERE `uuid`=?");
+            preparedStatement.setString(1, uuid.toString());
+            ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
                 jabatan = new Jabatan(UUID.fromString(rs.getString("uuid")), rs.getString("nama"));
@@ -64,13 +72,13 @@ public class JabatanDao {
         return jabatan;
     }
 
-    public void edit(UUID uuid, Jabatan jabatan) {
-        String update = "UPDATE `jabatan` SET `uuid`='" + jabatan.getUuid() + "',`nama`='" + jabatan.getNama() + "' WHERE uuid='" + uuid
-                + "'";
-        System.out.println(update);
-
+    public void edit(Jabatan jabatan) {
         try {
-            if (CONN.createStatement().executeUpdate(update) > 0) {
+            PreparedStatement preparedStatement = CONN.prepareStatement("UPDATE `jabatan` SET `nama`=? WHERE `uuid`=?");
+            preparedStatement.setString(1, jabatan.getNama());
+            preparedStatement.setString(2, jabatan.getUuid().toString());
+
+            if (preparedStatement.executeUpdate() > 0) {
                 logger.log(Level.INFO, "Berhasil mengubah data");
             } else {
                 logger.log(Level.INFO, "Gagal mengubah data");
@@ -81,10 +89,11 @@ public class JabatanDao {
     }
 
     public void delete(UUID uuid) {
-        String delete = "DELETE FROM `jabatan` WHERE uuid='" + uuid + "'";
-
         try {
-            if (CONN.createStatement().executeUpdate(delete) > 0) {
+            PreparedStatement preparedStatement = CONN.prepareStatement("DELETE FROM `jabatan` WHERE `uuid`=?");
+            preparedStatement.setString(1, uuid.toString());
+            
+            if (preparedStatement.executeUpdate() > 0) {
                 logger.log(Level.INFO, "Berhasil menghapus data");
             } else {
                 logger.log(Level.INFO, "Gagal menghapus data");

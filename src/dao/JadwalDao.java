@@ -2,6 +2,7 @@ package dao;
 
 import db.DBHelper;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -12,14 +13,21 @@ import java.util.UUID;
 import model.Jadwal;
 
 public class JadwalDao {
-    private static final Connection CONN = DBHelper.getConnection();
+    private static Connection CONN = DBHelper.getConnection();
     private static final Logger logger = Logger.getLogger(JadwalDao.class.getName());
 
-    public void add(Jadwal jadwal) {
-        String insert = "INSERT INTO `jadwal` (uuid, tanggalMulai, tanggalSelesai, uuidTugas) VALUES ('" + jadwal.getUuid() + "','" + jadwal.getTanggalMulai()+ "','" + jadwal.getTanggalSelesai() + "','" + jadwal.getUuidTugas() + "')";
+    public JadwalDao(Connection conn) {
+        CONN = conn;
+    }
 
+    public void add(Jadwal jadwal) {
         try {
-            if (CONN.createStatement().executeUpdate(insert) > 0) {
+            PreparedStatement preparedStatement = CONN.prepareStatement("INSERT INTO `jadwal` (uuidTugas, tanggalMulai, tanggalSelesai) VALUES (?, ?, ?)");
+            preparedStatement.setString(1, jadwal.getUuidTugas().toString());
+            preparedStatement.setString(2, jadwal.getTanggalMulai().toString());
+            preparedStatement.setString(3, jadwal.getTanggalSelesai().toString());
+
+            if (preparedStatement.executeUpdate() > 0) {
                 logger.log(Level.INFO, "Berhasil memasukkan data");
             } else {
                 logger.log(Level.INFO, "Gagal memasukkan data");
@@ -31,31 +39,32 @@ public class JadwalDao {
 
     public List<Jadwal> all() {
         String query = "SELECT * FROM `jadwal`";
-        List<Jadwal> jadwales = new ArrayList<>();
+        List<Jadwal> jadwals = new ArrayList<>();
 
         try {
             ResultSet rs = CONN.createStatement().executeQuery(query);
 
             while (rs.next()) {
-                Jadwal jadwal = new Jadwal(UUID.fromString(rs.getString("uuid")), rs.getDate("tanggalMulai").toLocalDate(), rs.getDate("tanggalSelesai").toLocalDate(), UUID.fromString(rs.getString("uuidTugas")));
-                jadwales.add(jadwal);
+                Jadwal jadwal = new Jadwal(UUID.fromString(rs.getString("uuidTugas")), rs.getDate("tanggalMulai").toLocalDate(), rs.getDate("tanggalSelesai").toLocalDate());
+                jadwals.add(jadwal);
             }
         } catch (SQLException ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
 
-        return jadwales;
+        return jadwals;
     }
     
-    public Jadwal get(UUID uuid) {
-        String query = "SELECT * FROM `jadwal` WHERE `uuid`='" + uuid + "'";
+    public Jadwal get(UUID uuidTugas) {
         Jadwal jadwal = null;
 
         try {
-            ResultSet rs = CONN.createStatement().executeQuery(query);
+            PreparedStatement preparedStatement = CONN.prepareStatement("SELECT * FROM `jadwal` WHERE `uuidTugas`=?");
+            preparedStatement.setString(1, uuidTugas.toString());
+            ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                jadwal = new Jadwal(UUID.fromString(rs.getString("uuid")), rs.getDate("tanggalMulai").toLocalDate(), rs.getDate("tanggalSelesai").toLocalDate(), UUID.fromString(rs.getString("uuidTugas")));
+                jadwal = new Jadwal(UUID.fromString(rs.getString("uuidTugas")), rs.getDate("tanggalMulai").toLocalDate(), rs.getDate("tanggalSelesai").toLocalDate());
             }
         } catch (SQLException ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
@@ -64,13 +73,14 @@ public class JadwalDao {
         return jadwal;
     }
 
-    public void edit(UUID uuid, Jadwal jadwal) {
-        String update = "UPDATE `jadwal` SET `uuid`='" + jadwal.getUuid() + "',`tanggalMulai`='" + jadwal.getTanggalMulai() + "',`tanggalSelesai`='" + jadwal.getTanggalSelesai() + "',`uuidTugas`='" + jadwal.getUuidTugas() + "' WHERE uuid='" + uuid
-                + "'";
-        System.out.println(update);
-
+    public void edit(Jadwal jadwal) {
         try {
-            if (CONN.createStatement().executeUpdate(update) > 0) {
+            PreparedStatement preparedStatement = CONN.prepareStatement("UPDATE `jadwal` SET `tanggalMulai`=?, `tanggalSelesai`=? WHERE `uuidTugas`=?");
+            preparedStatement.setString(1, jadwal.getTanggalMulai().toString());
+            preparedStatement.setString(2, jadwal.getTanggalSelesai().toString());
+            preparedStatement.setString(3, jadwal.getUuidTugas().toString());
+
+            if (preparedStatement.executeUpdate() > 0) {
                 logger.log(Level.INFO, "Berhasil mengubah data");
             } else {
                 logger.log(Level.INFO, "Gagal mengubah data");
@@ -80,11 +90,12 @@ public class JadwalDao {
         }
     }
 
-    public void delete(UUID uuid) {
-        String delete = "DELETE FROM `jadwal` WHERE uuid='" + uuid + "'";
-
+    public void delete(UUID uuidTugas) {
         try {
-            if (CONN.createStatement().executeUpdate(delete) > 0) {
+            PreparedStatement preparedStatement = CONN.prepareStatement("DELETE FROM `jadwal` WHERE `uuidTugas`=?");
+            preparedStatement.setString(1, uuidTugas.toString());
+            
+            if (preparedStatement.executeUpdate() > 0) {
                 logger.log(Level.INFO, "Berhasil menghapus data");
             } else {
                 logger.log(Level.INFO, "Gagal menghapus data");

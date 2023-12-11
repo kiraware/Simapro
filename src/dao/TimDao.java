@@ -2,6 +2,7 @@ package dao;
 
 import db.DBHelper;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -12,14 +13,20 @@ import java.util.UUID;
 import model.Tim;
 
 public class TimDao {
-    private static final Connection CONN = DBHelper.getConnection();
+    private static Connection CONN = DBHelper.getConnection();
     private static final Logger logger = Logger.getLogger(TimDao.class.getName());
 
-    public void add(Tim tim) {
-        String insert = "INSERT INTO `tim` (uuid, nama, uuidProyek) VALUES ('" + tim.getUuid() + "','" + tim.getNama() + "','" + tim.getUuidProyek() + "')";
+    public TimDao(Connection conn) {
+        CONN = conn;
+    }
 
+    public void add(Tim tim) {
         try {
-            if (CONN.createStatement().executeUpdate(insert) > 0) {
+            PreparedStatement preparedStatement = CONN.prepareStatement("INSERT INTO `tim` (uuid, nama) VALUES (?, ?)");
+            preparedStatement.setString(1, tim.getUuid().toString());
+            preparedStatement.setString(2, tim.getNama());
+
+            if (preparedStatement.executeUpdate() > 0) {
                 logger.log(Level.INFO, "Berhasil memasukkan data");
             } else {
                 logger.log(Level.INFO, "Gagal memasukkan data");
@@ -37,7 +44,7 @@ public class TimDao {
             ResultSet rs = CONN.createStatement().executeQuery(query);
 
             while (rs.next()) {
-                Tim tim = new Tim(UUID.fromString(rs.getString("uuid")), rs.getString("nama"), UUID.fromString(rs.getString("uuidProyek")));
+                Tim tim = new Tim(UUID.fromString(rs.getString("uuid")), rs.getString("nama"));
                 tims.add(tim);
             }
         } catch (SQLException ex) {
@@ -48,14 +55,15 @@ public class TimDao {
     }
     
     public Tim get(UUID uuid) {
-        String query = "SELECT * FROM `tim` WHERE `uuid`='" + uuid + "'";
         Tim tim = null;
 
         try {
-            ResultSet rs = CONN.createStatement().executeQuery(query);
+            PreparedStatement preparedStatement = CONN.prepareStatement("SELECT * FROM `tim` WHERE `uuid`=?");
+            preparedStatement.setString(1, uuid.toString());
+            ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                tim = new Tim(UUID.fromString(rs.getString("uuid")), rs.getString("nama"), UUID.fromString(rs.getString("uuidProyek")));
+                tim = new Tim(UUID.fromString(rs.getString("uuid")), rs.getString("nama"));
             }
         } catch (SQLException ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
@@ -64,13 +72,13 @@ public class TimDao {
         return tim;
     }
 
-    public void edit(UUID uuid, Tim tim) {
-        String update = "UPDATE `tim` SET `uuid`='" + tim.getUuid() + "',`nama`='" + tim.getNama() + "',`uuidProyek`='" + tim.getUuidProyek() + "' WHERE uuid='" + uuid
-                + "'";
-        System.out.println(update);
-
+    public void edit(Tim tim) {
         try {
-            if (CONN.createStatement().executeUpdate(update) > 0) {
+            PreparedStatement preparedStatement = CONN.prepareStatement("UPDATE `tim` SET `nama`=? WHERE `uuid`=?");
+            preparedStatement.setString(1, tim.getNama());
+            preparedStatement.setString(2, tim.getUuid().toString());
+
+            if (preparedStatement.executeUpdate() > 0) {
                 logger.log(Level.INFO, "Berhasil mengubah data");
             } else {
                 logger.log(Level.INFO, "Gagal mengubah data");
@@ -81,10 +89,11 @@ public class TimDao {
     }
 
     public void delete(UUID uuid) {
-        String delete = "DELETE FROM `tim` WHERE uuid='" + uuid + "'";
-
         try {
-            if (CONN.createStatement().executeUpdate(delete) > 0) {
+            PreparedStatement preparedStatement = CONN.prepareStatement("DELETE FROM `tim` WHERE `uuid`=?");
+            preparedStatement.setString(1, uuid.toString());
+            
+            if (preparedStatement.executeUpdate() > 0) {
                 logger.log(Level.INFO, "Berhasil menghapus data");
             } else {
                 logger.log(Level.INFO, "Gagal menghapus data");
