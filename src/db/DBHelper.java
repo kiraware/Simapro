@@ -41,7 +41,6 @@ public class DBHelper {
                 String password = getProperty("password");
                 Class.forName(driver);
                 connection = DriverManager.getConnection(url, user, password);
-                connection.setAutoCommit(false);
             } catch (ClassNotFoundException | SQLException ex) {
                 logger.log(Level.SEVERE, ex.getMessage(), ex);
             } 
