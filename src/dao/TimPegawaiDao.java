@@ -16,6 +16,9 @@ public class TimPegawaiDao {
     private static Connection CONN = DBHelper.getConnection();
     private static final Logger logger = Logger.getLogger(TimPegawaiDao.class.getName());
 
+    public TimPegawaiDao() {
+    }
+
     public TimPegawaiDao(Connection conn) {
         CONN = conn;
     }

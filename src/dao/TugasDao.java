@@ -16,6 +16,9 @@ public class TugasDao {
     private static Connection CONN = DBHelper.getConnection();
     private static final Logger logger = Logger.getLogger(TugasDao.class.getName());
 
+    public TugasDao() {
+    }
+
     public TugasDao(Connection conn) {
         CONN = conn;
     }

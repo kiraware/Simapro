@@ -16,6 +16,9 @@ public class ProyekDao {
     private static Connection CONN = DBHelper.getConnection();
     private static final Logger logger = Logger.getLogger(ProyekDao.class.getName());
 
+    public ProyekDao() {
+    }
+
     public ProyekDao(Connection conn) {
         CONN = conn;
     }

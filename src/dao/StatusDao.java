@@ -16,6 +16,9 @@ public class StatusDao {
     private static Connection CONN = DBHelper.getConnection();
     private static final Logger logger = Logger.getLogger(StatusDao.class.getName());
 
+    public StatusDao() {
+    }
+
     public StatusDao(Connection conn) {
         CONN = conn;
     }

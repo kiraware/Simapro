@@ -16,6 +16,9 @@ public class PegawaiDao {
     private static Connection CONN = DBHelper.getConnection();
     private static final Logger logger = Logger.getLogger(PegawaiDao.class.getName());
 
+    public PegawaiDao() {
+    }
+
     public PegawaiDao(Connection conn) {
         CONN = conn;
     }

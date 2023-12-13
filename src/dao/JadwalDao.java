@@ -16,6 +16,9 @@ public class JadwalDao {
     private static Connection CONN = DBHelper.getConnection();
     private static final Logger logger = Logger.getLogger(JadwalDao.class.getName());
 
+    public JadwalDao() {
+    }
+
     public JadwalDao(Connection conn) {
         CONN = conn;
     }
