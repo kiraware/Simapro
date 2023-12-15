@@ -42,7 +42,16 @@ public class Tugas {
             return false;
         }
         final Tugas other = (Tugas) obj;
-        return Objects.equals(this.uuid, other.uuid);
+        if (!Objects.equals(this.nama, other.nama)) {
+            return false;
+        }
+        if (!Objects.equals(this.deskripsi, other.deskripsi)) {
+            return false;
+        }
+        if (!Objects.equals(this.uuid, other.uuid)) {
+            return false;
+        }
+        return Objects.equals(this.uuidStatus, other.uuidStatus);
     }
 
     @Override

@@ -40,7 +40,13 @@ public class Jadwal {
             return false;
         }
         final Jadwal other = (Jadwal) obj;
-        return Objects.equals(this.uuidTugas, other.uuidTugas);
+        if (!Objects.equals(this.uuidTugas, other.uuidTugas)) {
+            return false;
+        }
+        if (!Objects.equals(this.tanggalMulai, other.tanggalMulai)) {
+            return false;
+        }
+        return Objects.equals(this.tanggalSelesai, other.tanggalSelesai);
     }
 
     @Override

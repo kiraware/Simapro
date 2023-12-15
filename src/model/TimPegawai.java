@@ -42,7 +42,16 @@ public class TimPegawai {
             return false;
         }
         final TimPegawai other = (TimPegawai) obj;
-        return Objects.equals(this.uuidTugas, other.uuidTugas);
+        if (!Objects.equals(this.uuidTugas, other.uuidTugas)) {
+            return false;
+        }
+        if (!Objects.equals(this.uuidTim, other.uuidTim)) {
+            return false;
+        }
+        if (!Objects.equals(this.uuidPegawai, other.uuidPegawai)) {
+            return false;
+        }
+        return Objects.equals(this.uuidJabatan, other.uuidJabatan);
     }
 
     @Override

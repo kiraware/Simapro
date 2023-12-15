@@ -49,7 +49,22 @@ public class Proyek {
             return false;
         }
         final Proyek other = (Proyek) obj;
-        return Objects.equals(this.uuidTim, other.uuidTim);
+        if (!Objects.equals(this.nama, other.nama)) {
+            return false;
+        }
+        if (!Objects.equals(this.deskripsi, other.deskripsi)) {
+            return false;
+        }
+        if (!Objects.equals(this.uuidTim, other.uuidTim)) {
+            return false;
+        }
+        if (!Objects.equals(this.tanggalMulai, other.tanggalMulai)) {
+            return false;
+        }
+        if (!Objects.equals(this.tanggalSelesai, other.tanggalSelesai)) {
+            return false;
+        }
+        return Objects.equals(this.anggaran, other.anggaran);
     }
 
     @Override

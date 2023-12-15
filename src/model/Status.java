@@ -36,6 +36,9 @@ public class Status {
             return false;
         }
         final Status other = (Status) obj;
+        if (!Objects.equals(this.nama, other.nama)) {
+            return false;
+        }
         return Objects.equals(this.uuid, other.uuid);
     }
 

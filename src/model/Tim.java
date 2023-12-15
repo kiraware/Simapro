@@ -36,6 +36,9 @@ public class Tim {
             return false;
         }
         final Tim other = (Tim) obj;
+        if (!Objects.equals(this.nama, other.nama)) {
+            return false;
+        }
         return Objects.equals(this.uuid, other.uuid);
     }
 

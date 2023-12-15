@@ -36,6 +36,9 @@ public class Jabatan {
             return false;
         }
         final Jabatan other = (Jabatan) obj;
+        if (!Objects.equals(this.nama, other.nama)) {
+            return false;
+        }
         return Objects.equals(this.uuid, other.uuid);
     }
 
