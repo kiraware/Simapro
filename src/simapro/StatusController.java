@@ -29,11 +29,15 @@ public class StatusController implements Initializable {
 
     private final StatusDao statusDao = new StatusDao();
 
+    @FXML
     private TextField tfUuid;
+    @FXML
     private TextField tfNama;
     @FXML
     private TableView<Status> tvStatuses;
+    @FXML
     private TableColumn<Status, UUID> colUuid;
+    @FXML
     private TableColumn<Status, String> colNama;
     @FXML
     private Button btnAdd;
