@@ -10,7 +10,7 @@ public class Proyek {
     private String deskripsi;
     private LocalDate tanggalMulai;
     private LocalDate tanggalSelesai;
-    private double anggaran;
+    private Double anggaran;
 
     public Proyek() {
         this.uuidTim = UUID.randomUUID();
@@ -18,10 +18,10 @@ public class Proyek {
         this.deskripsi = "";
         this.tanggalMulai = null;
         this.tanggalSelesai = null;
-        this.anggaran = 0;
+        this.anggaran = Double.valueOf(0);
     }
 
-    public Proyek(UUID uuidTim, String nama, String deskripsi, LocalDate tanggalMulai, LocalDate tanggalSelesai, double anggaran) {
+    public Proyek(UUID uuidTim, String nama, String deskripsi, LocalDate tanggalMulai, LocalDate tanggalSelesai, Double anggaran) {
         this.uuidTim = uuidTim;
         this.nama = nama;
         this.deskripsi = deskripsi;
@@ -93,11 +93,11 @@ public class Proyek {
         this.tanggalSelesai = tanggalSelesai;
     }
 
-    public double getAnggaran() {
+    public Double getAnggaran() {
         return anggaran;
     }
 
-    public void setAnggaran(double anggaran) {
+    public void setAnggaran(Double anggaran) {
         this.anggaran = anggaran;
     }
 }

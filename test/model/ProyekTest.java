@@ -57,7 +57,7 @@ public class ProyekTest {
     @Test
     public void testGetUuidTim() {
         UUID expResult = UUID.randomUUID();
-        Proyek proyek = new Proyek(expResult, "test", "desc", LocalDate.now(), LocalDate.now(), 100);
+        Proyek proyek = new Proyek(expResult, "test", "desc", LocalDate.now(), LocalDate.now(), Double.valueOf(100));
         UUID result = proyek.getUuidTim();
         assertEquals(expResult, result);
     }
@@ -68,7 +68,7 @@ public class ProyekTest {
     @Test
     public void testGetNama() {
         String expResult = "test";
-        Proyek proyek = new Proyek(UUID.randomUUID(), expResult, "desc", LocalDate.now(), LocalDate.now(), 100);
+        Proyek proyek = new Proyek(UUID.randomUUID(), expResult, "desc", LocalDate.now(), LocalDate.now(), Double.valueOf(100));
         String result = proyek.getNama();
         assertEquals(expResult, result);
     }
@@ -91,7 +91,7 @@ public class ProyekTest {
     @Test
     public void testGetDeskripsi() {
         String expResult = "desc";
-        Proyek proyek = new Proyek(UUID.randomUUID(), "test", expResult, LocalDate.now(), LocalDate.now(), 100);
+        Proyek proyek = new Proyek(UUID.randomUUID(), "test", expResult, LocalDate.now(), LocalDate.now(), Double.valueOf(100));
         String result = proyek.getDeskripsi();
         assertEquals(expResult, result);
     }
@@ -114,7 +114,7 @@ public class ProyekTest {
     @Test
     public void testGetTanggalMulai() {
         LocalDate expResult = LocalDate.now();
-        Proyek proyek = new Proyek(UUID.randomUUID(), "test", "desc", expResult, LocalDate.now(), 100);
+        Proyek proyek = new Proyek(UUID.randomUUID(), "test", "desc", expResult, LocalDate.now(), Double.valueOf(100));
         LocalDate result = proyek.getTanggalMulai();
         assertEquals(expResult, result);
     }
@@ -137,7 +137,7 @@ public class ProyekTest {
     @Test
     public void testGetTanggalSelesai() {
         LocalDate expResult = LocalDate.now();
-        Proyek proyek = new Proyek(UUID.randomUUID(), "test", "desc", LocalDate.now(), expResult, 100);
+        Proyek proyek = new Proyek(UUID.randomUUID(), "test", "desc", LocalDate.now(), expResult, Double.valueOf(100));
         LocalDate result = proyek.getTanggalSelesai();
         assertEquals(expResult, result);
     }

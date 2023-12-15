@@ -91,14 +91,14 @@ public class ProyekDaoTest {
      */
     @Test
     public void testAdd() {
-        Proyek proyek = new Proyek(tim1.getUuid(), "", "", null, null, 0);
+        Proyek proyek = new Proyek(tim1.getUuid(), "", "", null, null, Double.valueOf(0));
         LocalDate tanggalMulai = LocalDate.now();
         LocalDate tanggalSelesai = tanggalMulai.plusDays(1);
         proyek.setNama("test");
         proyek.setDeskripsi("desc");
         proyek.setTanggalMulai(tanggalMulai);
         proyek.setTanggalSelesai(tanggalSelesai);
-        proyek.setAnggaran(100);
+        proyek.setAnggaran(Double.valueOf(100));
         dao.add(proyek);
         Proyek proyekFromDb = dao.get(proyek.getUuidTim());
         assertEquals("test", proyekFromDb.getNama());
@@ -112,8 +112,8 @@ public class ProyekDaoTest {
      */
     @Test
     public void testAll() {
-        Proyek proyek1 = new Proyek(tim2.getUuid(), "", "", LocalDate.now(), LocalDate.now(), 0);
-        Proyek proyek2 = new Proyek(tim3.getUuid(), "", "", LocalDate.now(), LocalDate.now(), 0);
+        Proyek proyek1 = new Proyek(tim2.getUuid(), "", "", LocalDate.now(), LocalDate.now(), Double.valueOf(0));
+        Proyek proyek2 = new Proyek(tim3.getUuid(), "", "", LocalDate.now(), LocalDate.now(), Double.valueOf(0));
         dao.add(proyek1);
         dao.add(proyek2);
         List<Proyek> proyeks = dao.all();
@@ -126,14 +126,14 @@ public class ProyekDaoTest {
      */
     @Test
     public void testEdit() {
-        Proyek proyek = new Proyek(tim4.getUuid(), "", "", null, null, 0);
+        Proyek proyek = new Proyek(tim4.getUuid(), "", "", null, null, Double.valueOf(0));
         LocalDate tanggalMulai = LocalDate.now();
         LocalDate tanggalSelesai = tanggalMulai.plusDays(1);
         proyek.setNama("test");
         proyek.setDeskripsi("desc");
         proyek.setTanggalMulai(tanggalMulai);
         proyek.setTanggalSelesai(tanggalSelesai);
-        proyek.setAnggaran(100);
+        proyek.setAnggaran(Double.valueOf(100));
         proyek.setNama("test");
         dao.add(proyek);
         proyek.setNama("tset");
@@ -147,7 +147,7 @@ public class ProyekDaoTest {
      */
     @Test
     public void testDelete() {
-        Proyek proyek = new Proyek(tim4.getUuid(), "", "", LocalDate.now(), LocalDate.now(), 0);
+        Proyek proyek = new Proyek(tim4.getUuid(), "", "", LocalDate.now(), LocalDate.now(), Double.valueOf(0));
         dao.add(proyek);
         Proyek proyekFromDb = dao.get(proyek.getUuidTim());
         assertNotNull(proyekFromDb);
